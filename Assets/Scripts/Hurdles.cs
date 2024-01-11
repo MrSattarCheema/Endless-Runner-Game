@@ -21,7 +21,7 @@ public class Hurdles : MonoBehaviour
         //UnityEngine.Debug.Log(distanceBetweenHurdles);
         while (loop)
         {
-            if (transform.position.z + 225 < transform.position.z + hurdlePositionZ)
+            if (transform.position.z + 45 < transform.position.z + hurdlePositionZ)
             {
                 loop = false;
                 break;

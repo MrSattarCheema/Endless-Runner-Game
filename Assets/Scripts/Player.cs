@@ -38,6 +38,10 @@ public class Player : MonoBehaviour
         {
             controlName = PlayerPrefs.GetString("Controls");
             Debug.Log(controlName + "saved string");
+            if (controlName == "Touch")
+            {
+                buttonControlUi.gameObject.SetActive(false);
+            }
         }
         hurdles.GetComponent<Hurdles>().setHurdleDistance();
     }
@@ -53,59 +57,77 @@ public class Player : MonoBehaviour
         {
             transform.Translate(new Vector3(0, 0, 1) * playerSpeed * Time.deltaTime);
         }
+        //if (controlName == "Touch")
+        //{
+        //    buttonControlUi.gameObject.SetActive(false);
+        //    if (Input.touchCount == 1)
+        //    {
+        //        Touch touch = Input.GetTouch(0);
+        //        if (touch.phase == TouchPhase.Began)
+        //        {
+        //            fp = touch.position;
+        //            lp = touch.position;
+        //        }
+        //        //else if (touch.phase == TouchPhase.Moved)
+        //        //{
+        //        //    lp = touch.position;
+        //        //}
+        //        else if (touch.phase == TouchPhase.Ended)
+        //        {
+        //            lp = touch.position;
+        //            if (Mathf.Abs(lp.x - fp.x) > dragDistance || Mathf.Abs(lp.y - fp.y) > dragDistance)
+        //            {
+
+        //                if (Mathf.Abs(lp.x - fp.x) > Mathf.Abs(lp.y - fp.y))
+        //                {
+        //                    if ((lp.x > fp.x) && (transform.position.x < 2f))
+        //                    {
+        //                        moveRight();
+        //                    }
+        //                    else if ((lp.x < fp.x) && (transform.position.x > -2f))
+        //                    {
+        //                        moveLeft();
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    if (lp.y > fp.y)
+        //                    {
+        //                        moveUp();
+        //                    }
+        //                    else
+        //                    {
+        //                        moveDown();
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
+        //                Debug.Log("Tap");
+        //            }
+        //        }
+
+        //    }
+        //}
         if (controlName == "Touch")
         {
-            buttonControlUi.gameObject.SetActive(false);
-            if (Input.touchCount == 1)
+            if (SwipeManager.swipeLeft)
             {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
-                {
-                    fp = touch.position;
-                    lp = touch.position;
-                }
-                //else if (touch.phase == TouchPhase.Moved)
-                //{
-                //    lp = touch.position;
-                //}
-                else if (touch.phase == TouchPhase.Ended)
-                {
-                    lp = touch.position;
-                    if (Mathf.Abs(lp.x - fp.x) > dragDistance || Mathf.Abs(lp.y - fp.y) > dragDistance)
-                    {
-
-                        if (Mathf.Abs(lp.x - fp.x) > Mathf.Abs(lp.y - fp.y))
-                        {
-                            if ((lp.x > fp.x) && (transform.position.x < 2f))
-                            {
-                                moveRight();
-                            }
-                            else if ((lp.x < fp.x) && (transform.position.x > -2f))
-                            {
-                                moveLeft();
-                            }
-                        }
-                        else
-                        {
-                            if (lp.y > fp.y)
-                            {
-                                moveUp();
-                            }
-                            else
-                            {
-                                moveDown();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log("Tap");
-                    }
-                }
-
+                moveLeft();
+            }
+            else if (SwipeManager.swipeRight)
+            {
+                moveRight();
+            }
+            else if (SwipeManager.swipeUp)
+            {
+                moveUp();
+            }
+            else if (SwipeManager.swipeDown)
+            {
+                moveDown();
             }
         }
-
     }
     public void moveLeft()
     {

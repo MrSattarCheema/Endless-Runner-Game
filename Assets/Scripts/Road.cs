@@ -7,9 +7,9 @@ public class Road : MonoBehaviour
 {
     public GameObject player;
     float spwanRoad = -10;
-    int roadSpwanLoc = 240;
+    int roadSpwanLoc = 60;
     public GameObject road;
-    float prevRoad = 500;
+    float prevRoad = 130;
     List<GameObject> raodList = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
@@ -24,14 +24,14 @@ public class Road : MonoBehaviour
         {
 
             raodList.Add(Instantiate(road, new Vector3(0, 0, roadSpwanLoc), Quaternion.identity));
-            roadSpwanLoc += 240;
-            spwanRoad += 240;
+            roadSpwanLoc += 60;
+            spwanRoad += 60;
         }
         if (player.transform.position.z > prevRoad)
         {
             Destroy(raodList[0]);
             raodList.RemoveAt(0);
-            prevRoad += 240;
+            prevRoad += 60;
         }
     }
 }
